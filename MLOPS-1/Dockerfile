@@ -18,4 +18,3 @@ EXPOSE 8000
 
 # run the FastAPI application using uvicorn
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-

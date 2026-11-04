@@ -115,3 +115,56 @@ python -m pytest -v
 
 
 CREATE THE GITHUB ACTIONS workflow
+
+
+PROGRESS SO FAR->
+train model and create FAstAPI Integration -> DONE
+containerize the applicaiton with docker -> DONE
+automated tests with Github -> DONE
+experiment tracking and model registery with MLFLOW -> NEXT
+container registery and cloud Deployment
+production monitoring and drif detection
+automated training and model prediction
+
+
+=========================================================
+Phase-4: MLFlow - Experiment Tracking and Model Registery 
+=========================================================
+
+Why do we need MLFlow?
+- Imagine you train a model multiple times, changing the parameters or dataset versions 
+- Without experiment tracking you might end up with files like model_v1.joblib ,model_v2.joblib,
+model_v3.joblib ,model_final.joblib 
+- MLFlow helps maintain that record
+
+Training experiments 
+- Model parameters, dataset details and evaluation results 
+
+MLFlow Tracking
+- Records parameters, metrics, run information and model artifacts
+
+MLflow Model Registery
+- Organize midel versions, metadata and lifecycle management
+
+Deployment pipeline
+- Select, validate and deploy approved model versions
+
+4 major concepts:
+- Experiment - collection of related training runs
+- Run - one execution of training with specific parameters and results
+- Artifact - saved file produced by a run, such as trained model or evaluation report
+- Model Registery - managed catalog of registered models and their versions
+
+Install MLFLow 
+pip install MLflow
+
+mlflow server --backend-store-uri sqlite:///mlflow.db --host 127.0.0.1 --port 5000
+
+
+Evaluate and promote model versions
+- we will add a validation gate that checks model quality before allowing a model version to be considered for Deployment
+
+PROMOTE A VALIDATED Model using champion Alias
+- FastAPI applicaiton loads model from a local fine rn 
+- this works for demo purpose but becomes harder to manage when you have multiple modle versions
+- instead of hardcoding  a file path or version we can assign the alias champion to the model version we want

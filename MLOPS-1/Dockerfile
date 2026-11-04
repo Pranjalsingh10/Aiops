@@ -11,7 +11,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # copy the rest of the application code into the container and save the model.pkl file in the same directory as main.py
-COPY . .
+COPY main.py .
 
 
 EXPOSE 8000

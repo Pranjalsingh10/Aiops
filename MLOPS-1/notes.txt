@@ -167,4 +167,51 @@ Evaluate and promote model versions
 PROMOTE A VALIDATED Model using champion Alias
 - FastAPI applicaiton loads model from a local fine rn 
 - this works for demo purpose but becomes harder to manage when you have multiple modle versions
-- instead of hardcoding  a file path or version we can assign the alias champion to the model version we want
+- instead of hardcoding  a file path or version we can assign the alias champion to the model version we want 
+
+
+containerize the MLFLOW connected Api 
+MLFLOW server running on our machine
+MODEL REGISTRY + MODEL artifacts
+
+docker network connection
+docker container
+
+fastapi 
+restart mlflow server
+mlflow server --backend-store-uri sqlite:///mlflow.db --host 0.0.0.0 --port 5000
+
+mlflow server --backend-store-uri sqlite:///mlflow.db --host 0.0.0.0 --port 5000 \ allowed hosts "hosts.docker.internal,host.docker.internal:5000"
+
+start the container and test api
+
+Load the champion model in FastAPI
+
+Containerize MLFlow connected API
+
+Restart mlflow server:
+mlflow server \
+--backend-store-uri sqlite:///mlflow.db \
+--host 0.0.0.0 \
+--port 6001 \
+--allowed-hosts "host.docker.internal,host.docker.internal:7001"
+
+
+Build the updated image:
+docker build -t iris-ml-api-cs:v2
+
+docker rm -f iris-ml-api-container
+
+docker run -d --name iris-ml-api-container -p 8001:8000 -e MLFLOW_TRACKING_URI=http://host.docker.internal:6001 iris-ml-api-cs:v2
+
+docker ps -a
+
+Start the container:
+docker run -d \ --name iris-ml-api-container \-p 8000:8000 \-e MLFLOW_TRACKING_URI=http://host.docker.internal:6001 \iris-ml-api-cs:v2
+
+Automatically build and publish Docker Images Using GHCR
+GHCR-Gitub container Registery
+
+Github Event:
+Pull request to main-Test run + Image Build
+Push to main- Test run + Image Build + Publish Image

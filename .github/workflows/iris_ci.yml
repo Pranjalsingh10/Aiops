@@ -7,9 +7,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
   # Run CI whenever a pull request targets the main branch
   pull_request:
